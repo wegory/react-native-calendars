@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {FlatList, Platform, Dimensions, ActivityIndicator, View} from 'react-native';
 import PropTypes from 'prop-types';
 import XDate from 'xdate';
-
 import {xdateToData, parseDate} from '../interface';
 import styleConstructor from './style';
 import dateutils from '../dateutils';
@@ -212,10 +211,11 @@ class CalendarList extends Component {
       <CalendarListItem
         scrollToMonth={this.scrollToMonth.bind(this)}
         item={item} 
+        // calendarHeight={this.props.calendarHeight} 
         calendarHeight={this.props.calendarHeight} 
         calendarWidth={this.props.horizontal ? this.props.calendarWidth : undefined} 
         {...this.props} 
-        style={this.props.calendarStyle}
+        style={[this.props.calendarStyle, {marginBottom: Platform.isPad ? 270 : null}]}
       />
     );
   }

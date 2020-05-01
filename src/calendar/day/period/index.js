@@ -6,7 +6,16 @@ import {shouldUpdate} from '../../../component-updater';
 
 import * as defaultStyle from '../../../style';
 import styleConstructor from './style';
+import { Dimensions } from "react-native";
+const { width } = Dimensions.get("window");
 
+//Guideline sizes are based on standard ~5" screen mobile device
+const guidelineBaseWidth = 350;
+
+const scale = size => Math.round((width / guidelineBaseWidth) * size * 10) / 10;
+// const verticalScale = size => (height / guidelineBaseHeight) * size;
+const moderateScale = (size, factor = 0.5) =>
+  Math.round((size + (scale(size) - size) * factor) * 10) / 10;
 
 class Day extends Component {
   static displayName = 'IGNORE';
@@ -127,7 +136,7 @@ class Day extends Component {
 
     if (this.props.marking) {
       containerStyle.push({
-        borderRadius: 17
+        borderRadius: moderateScale(17)
       });
 
       const flags = this.markingStyle;

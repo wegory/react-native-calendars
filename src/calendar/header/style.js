@@ -1,6 +1,15 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import * as defaultStyle from '../../style';
+import { Dimensions } from "react-native";
+const { width } = Dimensions.get("window");
 
+//Guideline sizes are based on standard ~5" screen mobile device
+const guidelineBaseWidth = 350;
+
+const scale = size => Math.round((width / guidelineBaseWidth) * size * 10) / 10;
+// const verticalScale = size => (height / guidelineBaseHeight) * size;
+const moderateScale = (size, factor = 0.5) =>
+  Math.round((size + (scale(size) - size) * factor) * 10) / 10;
 const STYLESHEET_ID = 'stylesheet.calendar.header';
 
 export default function(theme={}) {
@@ -39,7 +48,7 @@ export default function(theme={}) {
     dayHeader: {
       marginTop: 2,
       marginBottom: 7,
-      width: 32,
+      width: moderateScale(32),
       textAlign: 'center',
       fontSize: appStyle.textDayHeaderFontSize,
       fontFamily: appStyle.textDayHeaderFontFamily,

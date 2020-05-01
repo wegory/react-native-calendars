@@ -1,3 +1,14 @@
+import { Dimensions } from "react-native";
+const { width } = Dimensions.get("window");
+
+//Guideline sizes are based on standard ~5" screen mobile device
+const guidelineBaseWidth = 350;
+
+const scale = size => Math.round((width / guidelineBaseWidth) * size * 10) / 10;
+// const verticalScale = size => (height / guidelineBaseHeight) * size;
+const moderateScale = (size, factor = 0.5) =>
+  Math.round((size + (scale(size) - size) * factor) * 10) / 10;
+
 export const foregroundColor = 'white';
 export const backgroundColor = '#f2F4f5'; // Agenda's reservations bg color
 
@@ -21,9 +32,9 @@ export const textMonthFontWeight = '300';
 export const textDayHeaderFontWeight = undefined;
 export const todayButtonFontWeight = '600';
 
-export const textDayFontSize = 16;
+export const textDayFontSize = moderateScale(16);
 export const textMonthFontSize = 16;
-export const textDayHeaderFontSize = 13;
+export const textDayHeaderFontSize = moderateScale(13);
 export const todayButtonFontSize = 14;
 
 export const textDayStyle = undefined;

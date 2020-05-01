@@ -1,9 +1,18 @@
 import {StyleSheet} from 'react-native';
 import * as defaultStyle from '../../../style';
 
+import { Dimensions } from "react-native";
+const { width } = Dimensions.get("window");
 
+//Guideline sizes are based on standard ~5" screen mobile device
+const guidelineBaseWidth = 350;
+
+const scale = size => Math.round((width / guidelineBaseWidth) * size * 10) / 10;
+// const verticalScale = size => (height / guidelineBaseHeight) * size;
+const moderateScale = (size, factor = 0.5) =>
+  Math.round((size + (scale(size) - size) * factor) * 10) / 10;
 const STYLESHEET_ID = 'stylesheet.day.period';
-const FILLER_HEIGHT = 34;
+const FILLER_HEIGHT = moderateScale(34);
 
 export default function styleConstructor(theme={}) {
   const appStyle = {...defaultStyle, ...theme};
@@ -15,9 +24,10 @@ export default function styleConstructor(theme={}) {
     },
     base: {
       //borderWidth: 1,
-      width: 38,
+      width: moderateScale(38),
       height: FILLER_HEIGHT,
-      alignItems: 'center'
+      alignItems: 'center',
+      overflow: 'hidden',
     },
     fillers: {
       position: 'absolute',
