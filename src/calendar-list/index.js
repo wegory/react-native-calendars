@@ -215,7 +215,7 @@ class CalendarList extends Component {
         calendarHeight={this.props.calendarHeight} 
         calendarWidth={this.props.horizontal ? this.props.calendarWidth : undefined} 
         {...this.props} 
-        style={[this.props.calendarStyle, {marginBottom: Platform.isPad ? 270 : null}]}
+        style={[this.props.calendarStyle, {marginBottom: Platform.isPad ? 270 : 20}]}
       />
     );
   }
